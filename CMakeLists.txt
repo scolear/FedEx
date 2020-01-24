@@ -18,8 +18,7 @@ set(SOURCES
         DataToMat.cpp
         Reader.cpp
         DataHandler.cpp
-        LinuxSerial.cpp
-        UARTConnection.cpp
+        SerialCommunication.cpp
         )
 
 qt5_wrap_cpp(SOURCES
@@ -27,8 +26,7 @@ qt5_wrap_cpp(SOURCES
         DataToMat.h
         Reader.h
         DataHandler.h
-        LinuxSerial.h
-        UARTConnection.h
+        SerialCommunication.h
         )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
