@@ -13,7 +13,7 @@ class DataHandler : public QObject
     QThread _readerThread;
 
 public:
-    DataHandler();
+    DataHandler(std::string);
     ~DataHandler();
 
     std::map<int, int>& getMap();

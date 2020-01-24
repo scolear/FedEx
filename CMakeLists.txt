@@ -19,6 +19,7 @@ set(SOURCES
         Reader.cpp
         DataHandler.cpp
         SerialCommunication.cpp
+        LinuxSerial.cpp
         )
 
 qt5_wrap_cpp(SOURCES
@@ -27,6 +28,7 @@ qt5_wrap_cpp(SOURCES
         Reader.h
         DataHandler.h
         SerialCommunication.h
+        LinuxSerial.h
         )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
