@@ -3,9 +3,6 @@
 #include <utility>
 
 
-//std::srand(time(NULL));
-
-
 MainWindow::MainWindow() : _timer(this)
 {
     generateLayout();
@@ -13,108 +10,88 @@ MainWindow::MainWindow() : _timer(this)
     QMetaObject::connectSlotsByName(this);
 }
 
+MainWindow::~MainWindow() {}
+
 void MainWindow::generateLayout()
 {
     if (objectName().isEmpty())
         setObjectName(QString::fromUtf8("MainWindow"));
         resize(505, 383);
-    centralwidget = new QWidget(this);
-    centralwidget->setObjectName(QString::fromUtf8("centralwidget"));
-    verticalLayout = new QVBoxLayout(centralwidget);
-    verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
-    _labelWidget = new QWidget(centralwidget);
+    _centralWidget = new QWidget(this);
+    _centralWidget->setObjectName(QString::fromUtf8("_centralWidget"));
+    _verticalLayout = new QVBoxLayout(_centralWidget);
+    _verticalLayout->setObjectName(QString::fromUtf8("_verticalLayout"));
+    _labelWidget = new QWidget(_centralWidget);
     _labelWidget->setObjectName(QString::fromUtf8("_labelWidget"));
-    verticalLayout_2 = new QHBoxLayout(_labelWidget);
-    verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
+    _verticalLayout_2 = new QVBoxLayout(_labelWidget);
+    _verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
     _displayLabel = new QLabel(_labelWidget);
     _displayLabel->setObjectName(QString::fromUtf8("_displayLabel"));
     _displayLabel->setAlignment(Qt::AlignCenter);
 
-
+    std::vector<float> data;
     setFrame();///TODO GIVE VECTOR TO FUNCTION;
 
-
-    _buttonsWidget = new QWidget(centralwidget);
+    _buttonsWidget = new QWidget(_centralWidget);
     _buttonsWidget->setObjectName(QString::fromUtf8("_buttonsWidget"));
-    horizontalLayout = new QHBoxLayout(_buttonsWidget);
-    horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
+    _horizontalLayout = new QHBoxLayout(_buttonsWidget);
+    _horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
     _connectButton = new QPushButton(_buttonsWidget);
     _connectButton->setObjectName(QString::fromUtf8("_connectButton"));
+    _connectButton->setText(QString::fromUtf8("Connect"));
 
-    horizontalLayout->addWidget(_connectButton);
+    _horizontalLayout->addWidget(_connectButton);
 
     _disconnectButton = new QPushButton(_buttonsWidget);
     _disconnectButton->setObjectName(QString::fromUtf8("_disconnectButton"));
+    _disconnectButton->setText(QString::fromUtf8("Disconnect"));
 
-    horizontalLayout->addWidget(_disconnectButton);
+    _horizontalLayout->addWidget(_disconnectButton);
 
     _saveResultButton = new QPushButton(_buttonsWidget);
     _saveResultButton->setObjectName(QString::fromUtf8("_saveResultButton"));
+    _saveResultButton->setText(QString::fromUtf8("Save image"));
 
-    horizontalLayout->addWidget(_saveResultButton);
+    _horizontalLayout->addWidget(_saveResultButton);
 
+    _verticalLayout_2->addWidget(_displayLabel);
+    _verticalLayout->addWidget(_labelWidget);
 
-    verticalLayout->addWidget(_buttonsWidget);
+    _verticalLayout->addWidget(_buttonsWidget);
 
-    _textLogWidget = new QWidget(centralwidget);
+    _textLogWidget = new QWidget(_centralWidget);
     _textLogWidget->setObjectName(QString::fromUtf8("_textLogWidget"));
-    horizontalLayout_2 = new QHBoxLayout(_textLogWidget);
-    horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
-    _textLogger = new QPlainTextEdit(_textLogWidget);
-    _textLogger->setObjectName(QString::fromUtf8("_textLogger"));
+    _horizontalLayout_2 = new QHBoxLayout(_textLogWidget);
+    _horizontalLayout_2->setObjectName(QString::fromUtf8("horizontalLayout_2"));
+    _messageLog = new QLabel(_textLogWidget);
+    _messageLog->setObjectName(QString::fromUtf8("_messageLog"));
 
-    horizontalLayout_2->addWidget(_textLogger);
+    _horizontalLayout_2->addWidget(_messageLog);
 
+    _verticalLayout->addWidget(_textLogWidget);
 
-    verticalLayout->addWidget(_textLogWidget);
+    setCentralWidget(_centralWidget);
 
-    setCentralWidget(centralwidget);
-    menubar = new QMenuBar(this);
-    menubar->setObjectName(QString::fromUtf8("menubar"));
-    menubar->setEnabled(false);
-    menubar->setGeometry(QRect(0, 0, 505, 22));
-    setMenuBar(menubar);
-    statusbar = new QStatusBar(this);
-    statusbar->setObjectName(QString::fromUtf8("statusbar"));
-    statusbar->setEnabled(false);
-    setStatusBar(statusbar);
-
-    retranslateUi(this);
+    updateLog("Program started");
 
     QMetaObject::connectSlotsByName(this);
 }
-
-void MainWindow::retranslateUi(QMainWindow *MainWindow)
-{
-    MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-    _connectButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-    _disconnectButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-    _saveResultButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-}
-
-/*void MainWindow::setFrame()
-{
-
-}*/
 
 void MainWindow::setFrame()
 {
 
     cv::Mat img;
     //img = cv::imread("../Test.jpg");
-
+    //cv::cvtColor(img, img,cv::COLOR_BGR2RGB);
+  
     int width = 600;
     DataToMat dataverter(width);
     std::vector<float> data;
     for (size_t i = 0; i < 360; i++)
     {
         data.push_back((rand() % (width/2)) +5);
-        //data.push_back(50);
-
     }
-    //cv::imshow("test", dataverter.convert(data));
-    //img = cv::imread(dataverter.convert(data));
-
+   
     img = dataverter.convert(data);
 
     verticalLayout_2->addWidget(_displayLabel);
@@ -125,9 +102,9 @@ void MainWindow::setFrame()
     QImage imag ((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
 
     _displayLabel->setPixmap(QPixmap::fromImage(imag));
-    //_displayLabel->setScaledContents(true);
-   // _displayLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 }
 
-MainWindow::~MainWindow() {}
-
+void MainWindow::updateLog(const std::string& message)
+{
+    _messageLog->setText(QString::fromUtf8(message.c_str()));
+}

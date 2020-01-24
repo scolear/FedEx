@@ -18,5 +18,4 @@ public:
 private:
 	std::vector<float> _distances;
 	int _width;
-    //id dataverter;
 };
