@@ -2,12 +2,12 @@
 #include "DataHandler.h"
 #include <QMetaType>
 
-DataHandler::DataHandler()
+DataHandler::DataHandler(std::string  comPort)
 {
     qRegisterMetaType<std::map<int, int>>("Type");
 
     // reader object is moved to another thread. From there, it signals with dataReady() to the handler's handleResults();
-    auto* reader = new Reader;
+    auto* reader = new Reader(comPort);
     reader->moveToThread(&_readerThread);
 
     QObject::connect(&_readerThread, &QThread::finished, reader, &QObject::deleteLater);

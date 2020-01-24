@@ -3,10 +3,16 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QThread>
+#include "SerialCommunication.h"
+#include <memory>
+#include <string>
 
 class Reader : public QObject
 {
     Q_OBJECT
+
+public:
+    Reader(std::string);
 
 public slots:
     void readData();
@@ -16,6 +22,7 @@ signals:
 
 private:
     std::map<int, int> _data;
+    std::unique_ptr<SerialCommunication> _communication;
 };
 
 
