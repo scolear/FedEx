@@ -3,6 +3,7 @@
 #include <utility>
 
 
+
 MainWindow::MainWindow() : _timer(this)
 {
     generateLayout();
@@ -51,6 +52,7 @@ void MainWindow::generateLayout()
     _saveResultButton = new QPushButton(_buttonsWidget);
     _saveResultButton->setObjectName(QString::fromUtf8("_saveResultButton"));
     _saveResultButton->setText(QString::fromUtf8("Save image"));
+    QObject::connect(_saveResultButton, SIGNAL(clicked()), this, SLOT(createScreenShot()));
 
     _horizontalLayout->addWidget(_saveResultButton);
 
@@ -80,11 +82,11 @@ void MainWindow::generateLayout()
 void MainWindow::setFrame()
 {
 
-    cv::Mat img;
-    //img = cv::imread("../Test.jpg");
-    //cv::cvtColor(img, img,cv::COLOR_BGR2RGB);
+    //cv::Mat img;
+    _image = cv::imread("../Test.jpg");
+
   
-    int width = 600;
+   /* int width = 600;
     DataToMat dataverter(width);
     std::vector<float> data;
     for (size_t i = 0; i < 360; i++)
@@ -92,11 +94,11 @@ void MainWindow::setFrame()
         data.push_back((rand() % (width/2)) +5);
     }
    
-    img = dataverter.convert(data);
+    img = dataverter.convert(data);*/
 
-    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
+    cv::cvtColor(_image,_image,cv::COLOR_BGR2RGB);
 
-    QImage imag ((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
+    QImage imag ((uchar*)_image.data, _image.cols, _image.rows, _image.step, QImage::Format_RGB888);
 
     _displayLabel->setPixmap(QPixmap::fromImage(imag));
 }
@@ -104,4 +106,13 @@ void MainWindow::setFrame()
 void MainWindow::updateLog(const std::string& message)
 {
     _messageLog->setText(QString::fromUtf8(message.c_str()));
+}
+
+void MainWindow::createScreenShot()
+{
+    QString file_name = QFileDialog::getSaveFileName(_saveResultButton, "Save file", QDir::homePath(), "*.jpeg", nullptr, QFileDialog::DontUseNativeDialog );
+    std::string path = file_name.toUtf8().constData();
+    path = path + ".jpeg";
+    cv::cvtColor(_image,_image,cv::COLOR_BGR2RGB);
+    cv::imwrite(path, _image);
 }

@@ -12,6 +12,8 @@
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
 #include <QTimer>
+#include <QFileDialog>
+#include <QDir>
 
 
 class DataToMat;
@@ -27,6 +29,7 @@ public:
 
 public slots:
     void updateLog(const std::string& message);
+    void createScreenShot();
 
 private:
     QVBoxLayout     *_verticalLayout;
@@ -46,7 +49,7 @@ private:
     QWidget         *_textLogWidget;
     QLabel          *_messageLog;
 
-    cv::Mat         *_image;
+    cv::Mat         _image;
     DataToMat       *_dataToMat;
     static std::vector<float> *_data;
     QTimer _timer;
