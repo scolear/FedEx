@@ -68,7 +68,6 @@ void DataToMat::linedShow(cv::Mat img, std::vector<float> distances)
     {
         cv::Point point = getCoordinates(i, distances[i]);
         cv::Point point2 = getCoordinates(i+1, distances[i+1]);
-        //drawWhitePoints(blank, point);
         drawColoredLines(img, point, point2, distances[i]);
     }
 }
