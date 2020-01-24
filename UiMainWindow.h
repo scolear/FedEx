@@ -1,6 +1,8 @@
 #ifndef DESIGNERIQFMCA_H
 #define DESIGNERIQFMCA_H
 
+#include "DataToMat.h"
+
 #include <QtCore/QVariant>
 #include <QtWidgets/QApplication>
 #include <QtWidgets/QHBoxLayout>
@@ -12,8 +14,11 @@
 #include <QtWidgets/QStatusBar>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <QTimer>
 
 QT_BEGIN_NAMESPACE
+
+class DataToMat;
 
 class MainWindow : public QMainWindow
 {
@@ -23,6 +28,7 @@ public:
     ~MainWindow() override;
     void generateLayout();
     void retranslateUi(QMainWindow *MainWindow);
+    void setFrame();
 
 private:
     QWidget *centralwidget;
@@ -40,6 +46,11 @@ private:
     QPlainTextEdit *_textLogger;
     QMenuBar *menubar;
     QStatusBar *statusbar;
+    cv::Mat *_image;
+    DataToMat *_dataToMat;
+    static std::vector<float> *_data;
+
+    QTimer _timer;
 
 };
 

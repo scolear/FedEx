@@ -1,10 +1,12 @@
 #include "UiMainWindow.h"
 
+#include <utility>
 
 
 
 
-MainWindow::MainWindow()
+
+MainWindow::MainWindow() : _timer(this)
 {
     generateLayout();
 
@@ -27,10 +29,11 @@ void MainWindow::generateLayout()
     _displayLabel = new QLabel(_labelWidget);
     _displayLabel->setObjectName(QString::fromUtf8("_displayLabel"));
 
-    verticalLayout_2->addWidget(_displayLabel);
 
+    //verticalLayout_2->addWidget(_displayLabel);
+    std::vector<float> data;
+    setFrame();///TODO GIVE VECTOR TO FUNCTION;
 
-    verticalLayout->addWidget(_labelWidget);
 
     _buttonsWidget = new QWidget(centralwidget);
     _buttonsWidget->setObjectName(QString::fromUtf8("_buttonsWidget"));
@@ -85,10 +88,34 @@ void MainWindow::generateLayout()
 void MainWindow::retranslateUi(QMainWindow *MainWindow)
 {
     MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-    _displayLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
+    //_displayLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
     _connectButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
     _disconnectButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
     _saveResultButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
+}
+
+/*void MainWindow::setFrame()
+{
+
+}*/
+
+void MainWindow::setFrame()
+{
+
+    cv::Mat img;
+    img = cv::imread("../Test.jpg");
+
+
+    verticalLayout_2->addWidget(_displayLabel);
+    verticalLayout->addWidget(_labelWidget);
+
+    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
+
+    QImage imag ((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
+
+    _displayLabel->setPixmap(QPixmap::fromImage(imag));
+    //_displayLabel->setScaledContents(true);
+   // _displayLabel->setSizePolicy(QSizePolicy::Ignored, QSizePolicy::Ignored);
 }
 
 MainWindow::~MainWindow() {}
