@@ -2,7 +2,7 @@
 #include "DataHandler.h"
 #include <QMetaType>
 
-DataHandler::DataHandler(std::string  comPort)
+DataHandler::DataHandler(std::string comPort)
 {
     qRegisterMetaType<std::map<int, int>>("Type");
 
@@ -15,12 +15,24 @@ DataHandler::DataHandler(std::string  comPort)
     QObject::connect(this, SIGNAL(startReading()), reader, SLOT(readData()));
     QObject::connect(reader, SIGNAL(dataReady()), this, SLOT(handleResults()));
     _readerThread.start();
+
+    auto* converter = new DataConverter(_data);
+
+    converter->moveToThread(&_converterThread);
+
+    QObject::connect(&_converterThread, &QThread::finished, converter, &QObject::deleteLater);
+    QObject::connect(this, SIGNAL(startConverting()), converter, SLOT(convertData()));
+    QObject::connect(converter, SIGNAL(matReady()), this, SLOT(handleMat()));
+    _converterThread.start();
+
 }
 
 DataHandler::~DataHandler()
 {
     _readerThread.quit();
     _readerThread.wait();
+    _converterThread.quit();
+    _converterThread.wait();
 }
 
 void DataHandler::handleResults()
@@ -33,4 +45,9 @@ void DataHandler::handleResults()
 std::map<int, int>& DataHandler::getMap()
 {
     return _data;
+}
+
+void DataHandler::handleMat()
+{
+
 }

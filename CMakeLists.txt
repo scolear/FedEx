@@ -20,6 +20,7 @@ set(SOURCES
         DataHandler.cpp
         SerialCommunication.cpp
         LinuxSerial.cpp
+        DataConverter.cpp
         )
 
 qt5_wrap_cpp(SOURCES
@@ -29,6 +30,7 @@ qt5_wrap_cpp(SOURCES
         DataHandler.h
         SerialCommunication.h
         LinuxSerial.h
+        DataConverter.h
         )
 
 add_executable(${PROJECT_NAME} ${SOURCES})
