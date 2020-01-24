@@ -16,11 +16,15 @@ set(SOURCES
         main.cpp
         UiMainWindow.cpp
         DataToMat.cpp
+        Reader.cpp
+        DataHandler.cpp
         )
 
 qt5_wrap_cpp(SOURCES
         UiMainWindow.h
         DataToMat.h
+        Reader.h
+        DataHandler.h
         )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

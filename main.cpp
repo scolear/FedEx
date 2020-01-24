@@ -2,6 +2,7 @@
 #include <QApplication>
 #include "UiMainWindow.h"
 #include "DataToMat.h"
+#include "DataHandler.h"
 
 int main(int argc, char** argv)
 {
@@ -18,5 +19,10 @@ int main(int argc, char** argv)
     {
         data.push_back((rand() % (width/2)) +5);
     }
+
+    DataHandler handler;
+
+    handler.startReading();
+
     return QApplication::exec();
 }
