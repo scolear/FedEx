@@ -7,6 +7,8 @@ MainWindow::MainWindow() : _timer(this)
 {
     generateLayout();
 
+    _image = cv::Mat(600, 600, CV_8UC3, cv::Scalar(0, 0, 0));
+
     QMetaObject::connectSlotsByName(this);
 }
 
@@ -80,7 +82,7 @@ void MainWindow::setFrame()
 {
     cv::Mat img = _image;
 
-    cv::cvtColor(img, img,cv::COLOR_BGR2RGB);
+    //cv::cvtColor(img, img,cv::COLOR_BGR2RGB);
 
     QImage imag((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
 

@@ -36,7 +36,7 @@ void Reader::readData()
             recievedPacketDistance[i] = '\0';
         }
         counter++;
-        if (counter == 100) {
+        if (counter == 10) {
             emit dataReady();
             counter = 0;
         }

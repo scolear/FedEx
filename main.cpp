@@ -42,7 +42,7 @@ int main(int argc, char** argv)
 
     }*/
 
-    DataHandler handler("\\\\.\\COM12", win);
+    DataHandler handler("\\\\.\\COM9", win);
 
     handler.startReading();
     handler.startConverting();

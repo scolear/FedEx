@@ -10,8 +10,9 @@ void DataConverter::convertData()
     while(true) {
 
         for (auto data : _dataMap) {
-            *temp = dataverter.convert(temp, data.first, data.second);
-            emit matReady();
+            *temp = dataverter.convert(temp, data.first, (data.second)/3);
+            
         }
+            emit matReady();
     }
 }

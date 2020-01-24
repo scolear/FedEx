@@ -10,7 +10,7 @@ cv::Mat DataToMat::convert(cv::Mat* img, float angle, float distance)
 {
     drawColoredPoints(*img, angle, distance);
     blackrefresher(*img, angle, _width);
-    refresherLine(*img, angle, _width);
+    //refresherLine(*img, angle, _width);
     return *img;
 }
 
