@@ -8,7 +8,7 @@ class DataToMat
 {
 public:
 	DataToMat(int width);
-	cv::Mat convert(cv::Mat img, float angle, float distance);
+	cv::Mat convert(cv::Mat* img, float angle, float distance);
 	cv::Point getCoordinates(float angle, float distance);
 	void drawColoredPoints(cv::Mat img, float angle, float distance);
 	void refresherLine(cv::Mat img, float angle, float distance);

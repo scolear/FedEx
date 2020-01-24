@@ -23,6 +23,7 @@ public:
     ~MainWindow() override;
     void generateLayout();
     void setFrame();
+    cv::Mat* getImage();
 
 public slots:
     void updateLog(const std::string& message);
@@ -45,7 +46,7 @@ private:
     QWidget         *_textLogWidget;
     QLabel          *_messageLog;
 
-    cv::Mat         *_image;
+    cv::Mat         _image;
     DataToMat       *_dataToMat;
     static std::vector<float> *_data;
 

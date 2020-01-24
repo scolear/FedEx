@@ -1,16 +1,17 @@
 #include "DataToMat.h"
 
 #define PI 3.14159265
+
 DataToMat::DataToMat(int width) : _width(width)
 {
 }
 
-cv::Mat DataToMat::convert(cv::Mat img, float angle, float distance)
+cv::Mat DataToMat::convert(cv::Mat* img, float angle, float distance)
 {
-    drawColoredPoints(img, angle, distance);
-    blackrefresher(img, angle, _width);
-    refresherLine(img, angle, _width);
-    return img;
+    drawColoredPoints(*img, angle, distance);
+    blackrefresher(*img, angle, _width);
+    refresherLine(*img, angle, _width);
+    return *img;
 }
 
 cv::Point DataToMat::getCoordinates(float angle, float distance)

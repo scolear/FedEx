@@ -10,8 +10,8 @@ int main(int argc, char** argv)
     //std::srand(time(nullptr));
 
     QApplication app(argc, argv);
-    //MainWindow win;
-    //win.show();
+    MainWindow win;
+    win.show();
     //
     //int width = 600;
     //DataToMat dataverter(width);
@@ -42,9 +42,10 @@ int main(int argc, char** argv)
 
     }*/
 
-    DataHandler handler("\\\\.\\COM12");
+    DataHandler handler("\\\\.\\COM12", win);
 
     handler.startReading();
+    handler.startConverting();
 
     return QApplication::exec();
 

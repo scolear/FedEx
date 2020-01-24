@@ -4,12 +4,15 @@
 #include <QtCore/QObject>
 #include <QtCore/QThread>
 
+#include "DataToMat.h"
+#include "UiMainWindow.h"
+
 class DataConverter : public QObject
 {
     Q_OBJECT
 
 public:
-    explicit DataConverter(std::map<int, int>& datamap);
+    DataConverter(std::map<int, int>& datamap, MainWindow& mainWindow);
 
 public slots:
     void convertData();
@@ -19,6 +22,7 @@ signals:
 
 private:
     std::map<int, int>& _dataMap;
+    MainWindow& _mainWindow;
 
 };
 

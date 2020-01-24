@@ -4,6 +4,7 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QThread>
+#include "UiMainWindow.h"
 #include "Reader.h"
 #include "DataConverter.h"
 
@@ -15,7 +16,7 @@ class DataHandler : public QObject
     QThread _converterThread;
 
 public:
-    explicit DataHandler(std::string);
+    DataHandler(std::string, MainWindow& mainWindow);
     ~DataHandler() override;
 
     std::map<int, int>& getMap();
@@ -29,6 +30,7 @@ signals:
 
 private:
     std::map<int, int> _data;
+    MainWindow& _mainWindow;
 
 };
 
