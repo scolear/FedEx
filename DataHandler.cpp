@@ -29,7 +29,7 @@ void DataHandler::handleResults()
     }
 }
 
-std::map<int, int>* DataHandler::getMap()
+std::map<int, int>& DataHandler::getMap()
 {
-    return &_data;
+    return _data;
 }

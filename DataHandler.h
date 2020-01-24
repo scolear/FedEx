@@ -16,7 +16,7 @@ public:
     DataHandler();
     ~DataHandler();
 
-    std::map<int, int>* getMap();
+    std::map<int, int>& getMap();
 
 public slots:
     void handleResults();
