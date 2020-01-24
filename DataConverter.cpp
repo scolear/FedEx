@@ -11,8 +11,7 @@ void DataConverter::convertData()
 
         for (auto data : _dataMap) {
             *temp = dataverter.convert(temp, data.first, data.second);
+            emit matReady();
         }
-
-        emit matReady();
     }
 }
