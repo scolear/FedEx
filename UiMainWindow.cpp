@@ -1,9 +1,9 @@
 #include "UiMainWindow.h"
-
+#include <iostream>
 #include <utility>
 
 
-
+//std::srand(time(NULL));
 
 
 MainWindow::MainWindow() : _timer(this)
@@ -24,14 +24,13 @@ void MainWindow::generateLayout()
     verticalLayout->setObjectName(QString::fromUtf8("verticalLayout"));
     _labelWidget = new QWidget(centralwidget);
     _labelWidget->setObjectName(QString::fromUtf8("_labelWidget"));
-    verticalLayout_2 = new QVBoxLayout(_labelWidget);
+    verticalLayout_2 = new QHBoxLayout(_labelWidget);
     verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
     _displayLabel = new QLabel(_labelWidget);
     _displayLabel->setObjectName(QString::fromUtf8("_displayLabel"));
+    _displayLabel->setAlignment(Qt::AlignCenter);
 
 
-    //verticalLayout_2->addWidget(_displayLabel);
-    std::vector<float> data;
     setFrame();///TODO GIVE VECTOR TO FUNCTION;
 
 
@@ -88,7 +87,6 @@ void MainWindow::generateLayout()
 void MainWindow::retranslateUi(QMainWindow *MainWindow)
 {
     MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-    //_displayLabel->setText(QCoreApplication::translate("MainWindow", "TextLabel", nullptr));
     _connectButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
     _disconnectButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
     _saveResultButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
@@ -103,8 +101,21 @@ void MainWindow::setFrame()
 {
 
     cv::Mat img;
-    img = cv::imread("../Test.jpg");
+    //img = cv::imread("../Test.jpg");
 
+    int width = 600;
+    DataToMat dataverter(width);
+    std::vector<float> data;
+    for (size_t i = 0; i < 360; i++)
+    {
+        data.push_back((rand() % (width/2)) +5);
+        //data.push_back(50);
+
+    }
+    //cv::imshow("test", dataverter.convert(data));
+    //img = cv::imread(dataverter.convert(data));
+
+    img = dataverter.convert(data);
 
     verticalLayout_2->addWidget(_displayLabel);
     verticalLayout->addWidget(_labelWidget);

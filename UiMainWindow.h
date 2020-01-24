@@ -34,7 +34,7 @@ private:
     QWidget *centralwidget;
     QVBoxLayout *verticalLayout;
     QWidget *_labelWidget;
-    QVBoxLayout *verticalLayout_2;
+    QHBoxLayout *verticalLayout_2;
     QLabel *_displayLabel;
     QWidget *_buttonsWidget;
     QHBoxLayout *horizontalLayout;
@@ -46,9 +46,8 @@ private:
     QPlainTextEdit *_textLogger;
     QMenuBar *menubar;
     QStatusBar *statusbar;
-    cv::Mat *_image;
     DataToMat *_dataToMat;
-    static std::vector<float> *_data;
+    //id dataverter;
 
     QTimer _timer;
 
