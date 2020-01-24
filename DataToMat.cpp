@@ -1,5 +1,5 @@
 #include "DataToMat.h"
-
+#define PI 3.14159265
 DataToMat::DataToMat(int width): _width(width)
 {
 }
@@ -12,10 +12,14 @@ cv::Mat DataToMat::convert(std::vector<float> distances)
     return blank;
 }
 
-cv::Point DataToMat::getCoordinates(int angle, int distance)
+cv::Point DataToMat::getCoordinates(float angle, float distance)
 {
-    cv::Point point((_width / 2) + (distance * cos(angle)), (_width / 2)+(distance * sin(angle)));
-  
+    int zeroX = _width / 2;
+    int zeroY = _width / 2;
+    int x = (distance * cos(angle * PI / 180.0)) + (_width / 2);
+    int y = (distance * sin(angle * PI / 180.0)) + (_width / 2);
+    cv::Point point(x, y);
+    printf("%f %f %.2f %i %i \n", cos(angle), sin(angle), angle, x, y);
     return point;
 }
 
@@ -29,15 +33,20 @@ void DataToMat::drawWhitePoints(cv::Mat img, cv::Point point)
         8);
 }
 
-void DataToMat::drawColoredPoints(cv::Mat img, cv::Point point, int distance)
+void DataToMat::drawColoredPoints(cv::Mat img, float angle, float distance)
 {
+    cv::Point pt = getCoordinates(angle, distance);
+   //if (angle == 0)
+   //{
+   //    pt.x = _width / 2;
+   //    pt.y = (_width / 2) - distance;
+   //}
     cv::line(img,
-        point,
-        point,
+        pt,
+        pt,
         distancedScalar(distance),
         5,
         8);
-    
 }
 
 void DataToMat::drawColoredLines(cv::Mat img, cv::Point point, cv::Point point2, int distance)
@@ -57,7 +66,7 @@ void DataToMat::dottedShow(cv::Mat img, std::vector<float> distances)
     {
         cv::Point point = getCoordinates(i, distances[i]);
         //drawWhitePoints(blank, point);
-        drawColoredPoints(img, point, distances[i]);
+        //drawColoredPoints(img, point, distances[i]);
 
     }
 }

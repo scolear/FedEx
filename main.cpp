@@ -1,28 +1,29 @@
 #include <iostream>
 #include "DataToMat.h"
-#include "sdk/app/ultra_simple/main.cpp"
 
 int main() {
     std::srand(time(NULL));
-    std::cout << "Hello, World!" << std::endl;
-    int width = 1000;
+    int width = 600;
     DataToMat dataverter(width);
     std::vector<float> data;
     
-    while (true)
+    while (cv::waitKey(27))
     {
         cv::Mat img(width, width, CV_8UC3, cv::Scalar(0, 0, 0));
-        for (size_t i = 0; i < 360; i++)
+        for (float i = 0; i < 360; i++)
         {
-            data.push_back((rand() % (width / 2)));
+            //data.push_back((rand() % (width / 2)));
+            int random = (rand() % (width / 2));
+            dataverter.drawColoredPoints(img, i,  random);
             //data.push_back(50);
+            cv::imshow("test", img);
+            cv::waitKey(1);
 
         }
-        dataverter.dottedShow(img, data);
-        cv::imshow("test", img);
-        data.clear();
+        //dataverter.dottedShow(img, data);
+        //data.clear();
         img.release();
-        cv::waitKey(27);
+        
     }
     
     return 0;
