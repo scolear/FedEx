@@ -73,17 +73,7 @@ void MainWindow::generateLayout()
 
     updateLog("Program started");
 
-    retranslateUi(this);
-
     QMetaObject::connectSlotsByName(this);
-}
-
-void MainWindow::retranslateUi(QMainWindow *MainWindow)
-{
-    MainWindow->setWindowTitle(QCoreApplication::translate("MainWindow", "MainWindow", nullptr));
-    _connectButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-    _disconnectButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
-    _saveResultButton->setText(QCoreApplication::translate("MainWindow", "PushButton", nullptr));
 }
 
 void MainWindow::setFrame()

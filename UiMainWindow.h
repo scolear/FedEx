@@ -22,7 +22,6 @@ public:
     MainWindow();
     ~MainWindow() override;
     void generateLayout();
-    void retranslateUi(QMainWindow *MainWindow);
     void setFrame();
 
 public slots:
