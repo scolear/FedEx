@@ -11,7 +11,6 @@ public:
 	cv::Point getCoordinates(float angle, float distance);
 	void drawWhitePoints(cv::Mat img, cv::Point point);
 	void drawColoredPoints(cv::Mat img, float angle, float distance);
-
 	void drawColoredLines(cv::Mat img, cv::Point point, cv::Point point2, int distance);
 	void dottedShow(cv::Mat img, std::vector<float>distances);
 	void linedShow(cv::Mat img, std::vector<float>distances);

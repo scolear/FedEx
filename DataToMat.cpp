@@ -1,4 +1,5 @@
 #include "DataToMat.h"
+
 #define PI 3.14159265
 DataToMat::DataToMat(int width): _width(width)
 {
@@ -67,7 +68,6 @@ void DataToMat::dottedShow(cv::Mat img, std::vector<float> distances)
         cv::Point point = getCoordinates(i, distances[i]);
         //drawWhitePoints(blank, point);
         //drawColoredPoints(img, point, distances[i]);
-
     }
 }
 
