@@ -4,11 +4,12 @@
 int main() {
     std::srand(time(NULL));
     std::cout << "Hello, World!" << std::endl;
-    DataToMat dataverter;
+    int width = 600;
+    DataToMat dataverter(width);
     std::vector<float> data;
     for (size_t i = 0; i < 360; i++)
     {
-        data.push_back((rand() % 100)+100);
+        data.push_back((rand() % (width/2)) +5);
         //data.push_back(50);
 
     }
