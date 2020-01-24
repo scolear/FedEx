@@ -1,6 +1,30 @@
 cmake_minimum_required(VERSION 3.16)
 project(FedEx)
 
-set(CMAKE_CXX_STANDARD 14)
+if(UNIX)
+    set(CMAKE_CXX_STANDARD 14)
+    set(CMAKE_CXX_STANDARD_REQUIRED ON)
+    set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -std=c++14 -pthread")
+endif()
 
-add_executable(FedEx main.cpp)
+find_package( OpenCV REQUIRED )
+find_package( Qt5 COMPONENTS Widgets REQUIRED )
+find_package( Qt5 COMPONENTS Core )
+include_directories( ${OpenCV_INCLUDE_DIRS} )
+
+set(SOURCES
+        main.cpp
+        UiMainWindow.cpp
+        DataToMat.cpp
+        )
+
+qt5_wrap_cpp(SOURCES
+        UiMainWindow.h
+        DataToMat.h
+        )
+
+add_executable(${PROJECT_NAME} ${SOURCES})
+
+target_link_libraries(${PROJECT_NAME} ${OpenCV_LIBS} )
+target_link_libraries( ${PROJECT_NAME} Qt5::Widgets)
+target_link_libraries( ${PROJECT_NAME} Qt5::Core)
