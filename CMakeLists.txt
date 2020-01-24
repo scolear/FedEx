@@ -1,12 +1,6 @@
 cmake_minimum_required(VERSION 3.16)
 project(FedEx)
 
-set(CMAKE_CXX_STANDARD 14)
-find_package( OpenCV REQUIRED )
-find_package( Qt5 COMPONENTS Widgets REQUIRED )
-find_package( Qt5 COMPONENTS Core )
-include_directories( ${OpenCV_INCLUDE_DIRS} )
-
 if(UNIX)
     set(CMAKE_CXX_STANDARD 14)
     set(CMAKE_CXX_STANDARD_REQUIRED ON)

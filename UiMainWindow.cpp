@@ -94,9 +94,6 @@ void MainWindow::setFrame()
    
     img = dataverter.convert(data);
 
-    verticalLayout_2->addWidget(_displayLabel);
-    verticalLayout->addWidget(_labelWidget);
-
     cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
 
     QImage imag ((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);

@@ -15,13 +15,13 @@ int main(int argc, char** argv)
     win.show();
 
 
-    int width = 600;
+    /*int width = 600;
     DataToMat dataverter(width);
     std::vector<float> data;
     for (size_t i = 0; i < 360; i++)
     {
         data.push_back((rand() % (width/2)) +5);
-    }
+    }*/
 
     DataHandler handler;
 
