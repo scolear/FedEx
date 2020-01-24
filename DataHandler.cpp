@@ -6,6 +6,7 @@ DataHandler::DataHandler()
 {
     qRegisterMetaType<std::map<int, int>>("Type");
 
+    // reader object is moved to another thread. From there, it signals with dataReady() to the handler's handleResults();
     auto* reader = new Reader;
     reader->moveToThread(&_readerThread);
 
