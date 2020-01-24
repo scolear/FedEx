@@ -16,10 +16,15 @@ public:
     DataHandler();
     ~DataHandler();
 
+    std::map<int, int>* getMap();
+
 public slots:
-    void handleResults(const std::map<int, int>&);
+    void handleResults();
 signals:
     void startReading();
+
+private:
+    std::map<int, int> _data;
 
 };
 

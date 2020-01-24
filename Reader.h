@@ -8,14 +8,18 @@ class Reader : public QObject
 {
     Q_OBJECT
 
+public:
+    Reader(std::map<int, int>* datamap);
+
 public slots:
     void readData();
 
 signals:
-    void dataReady(const std::map<int, int> angleDistanceData);
+    void dataReady();
 
 private:
-    std::map<int, int> _data;
+    std::map<int, int>* data;
+
 };
 
 
