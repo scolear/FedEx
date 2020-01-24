@@ -2,6 +2,7 @@
 #include "SerialCommunication.h"
 
 int main() {
+    /*
     SerialCommunication* serial = new SerialCommunication("\\\\.\\COM12", 115200);
     char recievedPacketAngle[10];
     char recievedPacketDistance[10];
@@ -31,5 +32,6 @@ int main() {
             recievedPacketDistance[i] = '\0';
         }
     }
+    */
     return 0;
 }
