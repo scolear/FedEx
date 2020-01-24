@@ -3,4 +3,4 @@ project(FedEx)
 
 set(CMAKE_CXX_STANDARD 14)
 
-add_executable(FedEx main.cpp)
+add_executable(FedEx main.cpp SerialCommunication.cpp)
