@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #pragma once
 #include <windows.h>
 #include <string>
@@ -21,3 +22,4 @@ private:
     COMMTIMEOUTS _communicationTimeouts;
     DWORD _dwEventMask;
 };
+#endif

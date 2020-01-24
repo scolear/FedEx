@@ -1,3 +1,4 @@
+#ifdef _WIN32
 #include "SerialCommunication.h"
  
 SerialCommunication::SerialCommunication(std::string portName, int baudrate) {
@@ -121,5 +122,5 @@ void SerialCommunication::setUpSerialTimeouts()
         std::cout << "Timeout set problem" << std::endl;
     }
 }
-
+#endif
  

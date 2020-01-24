@@ -1,5 +1,5 @@
 #include "UiMainWindow.h"
-
+#include <iostream>
 #include <utility>
 
 
@@ -27,6 +27,7 @@ void MainWindow::generateLayout()
     _verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
     _displayLabel = new QLabel(_labelWidget);
     _displayLabel->setObjectName(QString::fromUtf8("_displayLabel"));
+    _displayLabel->setAlignment(Qt::AlignCenter);
 
     std::vector<float> data;
     setFrame();///TODO GIVE VECTOR TO FUNCTION;
@@ -78,10 +79,22 @@ void MainWindow::generateLayout()
 
 void MainWindow::setFrame()
 {
-    cv::Mat img;
-    img = cv::imread("../Test.jpg");
 
-    cv::cvtColor(img, img,cv::COLOR_BGR2RGB);
+    cv::Mat img;
+    //img = cv::imread("../Test.jpg");
+    //cv::cvtColor(img, img,cv::COLOR_BGR2RGB);
+  
+    int width = 600;
+    DataToMat dataverter(width);
+    std::vector<float> data;
+    for (size_t i = 0; i < 360; i++)
+    {
+        data.push_back((rand() % (width/2)) +5);
+    }
+   
+    img = dataverter.convert(data);
+
+    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
 
     QImage imag ((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
 
