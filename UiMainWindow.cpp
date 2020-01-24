@@ -37,16 +37,19 @@ void MainWindow::generateLayout()
     _horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
     _connectButton = new QPushButton(_buttonsWidget);
     _connectButton->setObjectName(QString::fromUtf8("_connectButton"));
+    _connectButton->setText(QString::fromUtf8("Connect"));
 
     _horizontalLayout->addWidget(_connectButton);
 
     _disconnectButton = new QPushButton(_buttonsWidget);
     _disconnectButton->setObjectName(QString::fromUtf8("_disconnectButton"));
+    _disconnectButton->setText(QString::fromUtf8("Disconnect"));
 
     _horizontalLayout->addWidget(_disconnectButton);
 
     _saveResultButton = new QPushButton(_buttonsWidget);
     _saveResultButton->setObjectName(QString::fromUtf8("_saveResultButton"));
+    _saveResultButton->setText(QString::fromUtf8("Save image"));
 
     _horizontalLayout->addWidget(_saveResultButton);
 
