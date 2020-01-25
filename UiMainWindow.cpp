@@ -1,6 +1,4 @@
 #include "UiMainWindow.h"
-#include <iostream>
-#include <utility>
 
 
 MainWindow::MainWindow() : _timer(this)
@@ -53,6 +51,7 @@ void MainWindow::generateLayout()
     _saveResultButton = new QPushButton(_buttonsWidget);
     _saveResultButton->setObjectName(QString::fromUtf8("_saveResultButton"));
     _saveResultButton->setText(QString::fromUtf8("Save image"));
+    QObject::connect(_saveResultButton, SIGNAL(clicked()), this, SLOT(createScreenShot()));
 
     _horizontalLayout->addWidget(_saveResultButton);
 
@@ -98,4 +97,13 @@ void MainWindow::updateLog(const std::string& message)
 cv::Mat* MainWindow::getImage()
 {
     return &_image;
+}
+
+void MainWindow::createScreenShot()
+{
+    QString file_name = QFileDialog::getSaveFileName(_saveResultButton, "Save file", QDir::homePath(), "*.jpeg", nullptr, QFileDialog::DontUseNativeDialog );
+    std::string path = file_name.toUtf8().constData();
+    path = path + ".jpeg";
+    cv::cvtColor(_image,_image,cv::COLOR_BGR2RGB);
+    cv::imwrite(path, _image);
 }

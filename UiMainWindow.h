@@ -11,7 +11,11 @@
 #include <QtWidgets/QPushButton>
 #include <QtWidgets/QVBoxLayout>
 #include <QtWidgets/QWidget>
+#include <QtWidgets/QFileDialog>
 #include <QTimer>
+
+#include <iostream>
+#include <utility>
 
 
 class DataToMat;
@@ -26,8 +30,10 @@ public:
     void setFrame();
     cv::Mat* getImage();
 
+
 public slots:
     void updateLog(const std::string& message);
+    void createScreenShot();
 
 private:
     QVBoxLayout     *_verticalLayout;
