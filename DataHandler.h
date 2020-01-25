@@ -13,7 +13,6 @@ class DataHandler : public QObject
     Q_OBJECT
 
     QThread _readerThread;
-    QThread _converterThread;
 
 public:
     DataHandler(std::string, MainWindow& mainWindow);
@@ -31,6 +30,7 @@ signals:
 private:
     std::map<int, int> _data;
     MainWindow& _mainWindow;
+    DataToMat _dataverter;
 
 };
 

@@ -47,7 +47,6 @@ int main(int argc, char** argv)
     DataHandler handler("\\\\.\\COM9", win);
 
     handler.startReading();
-    handler.startConverting();
 
     return QApplication::exec();
 
