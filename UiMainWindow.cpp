@@ -34,17 +34,6 @@ void MainWindow::generateLayout()
     _buttonsWidget->setObjectName(QString::fromUtf8("_buttonsWidget"));
     _horizontalLayout = new QHBoxLayout(_buttonsWidget);
     _horizontalLayout->setObjectName(QString::fromUtf8("horizontalLayout"));
-    _connectButton = new QPushButton(_buttonsWidget);
-    _connectButton->setObjectName(QString::fromUtf8("_connectButton"));
-    _connectButton->setText(QString::fromUtf8("Connect"));
-
-    _horizontalLayout->addWidget(_connectButton);
-
-    _disconnectButton = new QPushButton(_buttonsWidget);
-    _disconnectButton->setObjectName(QString::fromUtf8("_disconnectButton"));
-    _disconnectButton->setText(QString::fromUtf8("Disconnect"));
-
-    _horizontalLayout->addWidget(_disconnectButton);
 
     _saveResultButton = new QPushButton(_buttonsWidget);
     _saveResultButton->setObjectName(QString::fromUtf8("_saveResultButton"));
@@ -52,6 +41,13 @@ void MainWindow::generateLayout()
     QObject::connect(_saveResultButton, SIGNAL(clicked()), this, SLOT(createScreenShot()));
 
     _horizontalLayout->addWidget(_saveResultButton);
+
+    _exitButton = new QPushButton(_buttonsWidget);
+    _exitButton->setObjectName(QString::fromUtf8("_exitButton"));
+    _exitButton->setText(QString::fromUtf8("Quit"));
+    QObject::connect(_exitButton, SIGNAL(clicked()), this, SLOT(deleteLater()));
+
+    _horizontalLayout->addWidget(_exitButton);
 
     _verticalLayout_2->addWidget(_displayLabel);
     _verticalLayout->addWidget(_labelWidget);

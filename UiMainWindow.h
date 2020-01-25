@@ -44,8 +44,7 @@ private:
     QLabel          *_displayLabel;
 
     QWidget         *_buttonsWidget;
-    QPushButton     *_connectButton;
-    QPushButton     *_disconnectButton;
+    QPushButton     *_exitButton;
     QPushButton     *_saveResultButton;
 
     QWidget         *_textLogWidget;
