@@ -1,5 +1,5 @@
 #include "UiMainWindow.h"
-#include <iostream>
+
 #include <utility>
 
 
@@ -18,7 +18,7 @@ void MainWindow::generateLayout()
 {
     if (objectName().isEmpty())
         setObjectName(QString::fromUtf8("MainWindow"));
-        resize(505, 383);
+    resize(505, 383);
     _centralWidget = new QWidget(this);
     _centralWidget->setObjectName(QString::fromUtf8("_centralWidget"));
     _verticalLayout = new QVBoxLayout(_centralWidget);
@@ -30,9 +30,6 @@ void MainWindow::generateLayout()
     _displayLabel = new QLabel(_labelWidget);
     _displayLabel->setObjectName(QString::fromUtf8("_displayLabel"));
     _displayLabel->setAlignment(Qt::AlignCenter);
-
-    std::vector<float> data;
-    setFrame();///TODO GIVE VECTOR TO FUNCTION;
 
     _buttonsWidget = new QWidget(_centralWidget);
     _buttonsWidget->setObjectName(QString::fromUtf8("_buttonsWidget"));
@@ -53,6 +50,7 @@ void MainWindow::generateLayout()
     _saveResultButton = new QPushButton(_buttonsWidget);
     _saveResultButton->setObjectName(QString::fromUtf8("_saveResultButton"));
     _saveResultButton->setText(QString::fromUtf8("Save image"));
+    QObject::connect(_saveResultButton, SIGNAL(clicked()), this, SLOT(createScreenShot()));
 
     _horizontalLayout->addWidget(_saveResultButton);
 
@@ -81,11 +79,9 @@ void MainWindow::generateLayout()
 
 void MainWindow::setFrame()
 {
-    cv::Mat img = _image;
+    cv::cvtColor(_image, _image, cv::COLOR_BGR2RGB);
 
-    //cv::cvtColor(img, img,cv::COLOR_BGR2RGB);
-
-    QImage imag((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
+    QImage imag((uchar*)_image.data, _image.cols, _image.rows, _image.step, QImage::Format_RGB888);
 
     _displayLabel->setPixmap(QPixmap::fromImage(imag));
 }
@@ -98,4 +94,18 @@ void MainWindow::updateLog(const std::string& message)
 cv::Mat* MainWindow::getImage()
 {
     return &_image;
+}
+
+void MainWindow::setImage(cv::Mat imageIn)
+{
+    _image = std::move(imageIn);
+}
+
+void MainWindow::createScreenShot()
+{
+    QString file_name = QFileDialog::getSaveFileName(_saveResultButton, "Save file", QDir::homePath(), "*.jpeg", nullptr, QFileDialog::DontUseNativeDialog );
+    std::string path = file_name.toUtf8().constData();
+    path = path + ".jpeg";
+    cv::cvtColor(_image,_image,cv::COLOR_BGR2RGB);
+    cv::imwrite(path, _image);
 }

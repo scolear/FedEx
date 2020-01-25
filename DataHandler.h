@@ -18,14 +18,10 @@ public:
     DataHandler(std::string, MainWindow& mainWindow);
     ~DataHandler() override;
 
-    std::map<int, int>& getMap();
-
 public slots:
     void handleResults();
-    void handleMat();
 signals:
     void startReading();
-    void startConverting();
 
 private:
     std::map<int, int> _data;

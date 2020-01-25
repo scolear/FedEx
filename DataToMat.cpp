@@ -19,7 +19,6 @@ cv::Point DataToMat::getCoordinates(float angle, float distance)
     int x = (distance * cos(angle * PI / 180.0)) + (_width / 2);
     int y = (distance * sin(angle * PI / 180.0)) + (_width / 2);
     cv::Point point(x, y);
-    //printf("%f %f %.2f %i %i \n", cos(angle * PI / 180.0), sin(angle * PI / 180.0), angle, x, y);
     return point;
 }
 
@@ -45,24 +44,15 @@ void DataToMat::refresherLine(cv::Mat img, float angle, float distance)
         4);
 }
 
-void DataToMat::blackrefresher(cv::Mat img, float angle, float distance) {
-    cv::Point pt = getCoordinates(angle + 17, _width);
+void DataToMat::blackrefresher(cv::Mat img, float angle, float distance)
+{
+    cv::Point pt = getCoordinates(angle + 3, _width);
     cv::line(img,
         cv::Point(_width / 2, _width / 2),
         pt,
         cv::Scalar(0, 0, 0),
-        8,
+        10,
         8);
-}
-
-void DataToMat::dottedShow(cv::Mat img, std::vector<float> distances)
-{
-    for (size_t i = 0; i < 360; i++)
-    {
-        cv::Point point = getCoordinates(i, distances[i]);
-        //drawWhitePoints(blank, point);
-        //drawColoredPoints(img, point, distances[i]);
-    }
 }
 
 cv::Scalar DataToMat::distancedScalar(int distance)

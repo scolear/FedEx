@@ -26,18 +26,8 @@ DataHandler::~DataHandler()
 void DataHandler::handleResults()
 {
     for (auto dat : _data) {
-        std::cout << dat.first << " : " << dat.second << " distance / 3: " << (dat.second / 3) << std::endl;
-        *_mainWindow.getImage() = _dataverter.convert(_mainWindow.getImage(), dat.first, (dat.second) / 3);
+        std::cout << dat.first << " : " << dat.second << " || distance / 3: " << (dat.second / 3) << std::endl;
+        _mainWindow.setImage(_dataverter.convert(_mainWindow.getImage(), dat.first, (dat.second) / 3));
     }
-    handleMat();
-}
-
-std::map<int, int>& DataHandler::getMap()
-{
-    return _data;
-}
-
-void DataHandler::handleMat()
-{
     _mainWindow.setFrame();
 }
