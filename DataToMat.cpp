@@ -8,8 +8,16 @@ DataToMat::DataToMat(int width) : _width(width)
 
 cv::Mat DataToMat::convert(cv::Mat* img, float angle, float distance)
 {
-    drawColoredPoints(*img, angle, distance);
-    blackrefresher(*img, angle, _width);
+    if (_perviousDistance[angle] != distance) {
+        pointDelete(*img, angle);
+        _perviousDistance[angle] = distance;
+    }
+    else{
+        _perviousDistance[angle] = distance;
+    }
+    drawColoredPoints(*img, angle, _perviousDistance[angle]);
+    //drawColoredPoints(*img, angle, distance);
+    //blackrefresher(*img, angle, _width);
     //refresherLine(*img, angle, _width);
     return *img;
 }
@@ -46,12 +54,12 @@ void DataToMat::refresherLine(cv::Mat img, float angle, float distance)
 }
 
 void DataToMat::blackrefresher(cv::Mat img, float angle, float distance) {
-    cv::Point pt = getCoordinates(angle + 17, _width);
+    cv::Point pt = getCoordinates(angle+3, _width);
     cv::line(img,
         cv::Point(_width / 2, _width / 2),
         pt,
         cv::Scalar(0, 0, 0),
-        8,
+        5,
         8);
 }
 
@@ -63,6 +71,17 @@ void DataToMat::dottedShow(cv::Mat img, std::vector<float> distances)
         //drawWhitePoints(blank, point);
         //drawColoredPoints(img, point, distances[i]);
     }
+}
+
+void DataToMat::pointDelete(cv::Mat img, float angle)
+{
+    cv::Point pt = getCoordinates(angle, _perviousDistance[angle]);
+    cv::line(img,
+        pt,
+        pt,
+        cv::Scalar(0, 0, 0),
+        5,
+        8);
 }
 
 cv::Scalar DataToMat::distancedScalar(int distance)
