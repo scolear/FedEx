@@ -4,6 +4,7 @@
 #include <utility>
 #include <sys/time.h>
 #include "LinuxSerial.h"
+#include <iostream>
 
 SerialCommunication::SerialCommunication(std::string portName, int baudRate) : _portName(portName), _baudRate(baudRate)
 {
@@ -91,8 +92,42 @@ char SerialCommunication::readChar(char *pByte, unsigned int timeOutMS)
 
 void SerialCommunication::read(char* incomingPacketAngle, char* incomingPacketDistance, int size)
 {
-    memset(incomingPacketAngle, '\0', size);
-    readString(incomingPacketAngle, '\n', size, 20);
+    //memset(incomingPacketAngle, '\0', size);
+    //readString(incomingPacketAngle, '\n', size, 20);
+
+    char* temp = (char*)calloc(1, sizeof(char));
+    int last = 0;
+    int otherLast = 0;
+    bool startFlag = false;
+    bool switchFlag = false;
+    char start = 'n';
+    char change = 'k';
+    char stop = 'l';
+    char delimer = ' ';
+    while (last < size) {
+
+        readString(temp, '\n', 1, 0);
+
+        if (*temp == change) {
+            switchFlag = true;
+        }
+        if (*temp == stop) {
+            free(temp);
+            return;
+        }
+        if (startFlag == true && switchFlag == false && !(*temp == change) && !(*temp == delimer)) {
+            incomingPacketAngle[last] = *temp;
+            last++;
+        }
+        if (switchFlag == true && !(*temp == change) && !(*temp == delimer)) {
+            incomingPacketDistance[otherLast] = *temp;
+            otherLast++;
+        }
+        if (*temp == start) {
+            startFlag = true;
+        }
+    }
+    free(temp);
 }
 
 void SerialCommunication::close()
