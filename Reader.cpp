@@ -34,6 +34,7 @@ void Reader::readData()
         int distanceN = std::stoi(distance);
 
         (*_data)[angleN] = distanceN;
+        //emit sendDataPair(angleN, distanceN);
 
         for (int i = 0; i < 10; i++) {
             recievedPacketAngle[i] = '\0';

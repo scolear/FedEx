@@ -28,7 +28,6 @@ public:
     cv::Mat* getImage();
     void setImage(cv::Mat);
 
-
 public slots:
     void updateLog(const std::string& message);
     void createScreenShot();

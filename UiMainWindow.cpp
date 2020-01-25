@@ -8,6 +8,7 @@ MainWindow::MainWindow() : _timer(this)
 
     _image = cv::Mat(600, 600, CV_8UC3, cv::Scalar(0, 0, 0));
 
+
     QMetaObject::connectSlotsByName(this);
 }
 

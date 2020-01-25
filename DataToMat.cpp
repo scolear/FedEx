@@ -34,6 +34,13 @@ void DataToMat::drawColoredPoints(cv::Mat img, float angle, float distance)
         8);
 }
 
+void DataToMat::clearScreen(cv::Mat* img)
+{
+    for (int i = 0; i < 360; ++i) {
+        blackrefresher(*img, i, 500);
+    }
+}
+
 void DataToMat::refresherLine(cv::Mat img, float angle, float distance)
 {
     cv::Point pt = getCoordinates(angle+20, _width);

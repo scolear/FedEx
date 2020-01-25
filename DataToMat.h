@@ -15,6 +15,7 @@ public:
 	void blackrefresher(cv::Mat img, float angle, float distance);
     void pointDelete(cv::Mat img, float angle);
 	cv::Scalar distancedScalar(int distance);
+    void clearScreen(cv::Mat* img);
 
 private:
 	int _width;

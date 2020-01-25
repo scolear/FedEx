@@ -23,6 +23,7 @@ public slots:
 
 signals:
     void dataReady();
+    void sendDataPair(int, int);
 
 private:
     std::map<int, int>* _data;

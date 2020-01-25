@@ -21,6 +21,9 @@ public:
 
 public slots:
     void handleResults();
+    void handlePair(int angle, int dist);
+    void clearFrame();
+
 signals:
     void startReading();
 
@@ -28,6 +31,7 @@ private:
     std::map<int, int> _data;
     MainWindow& _mainWindow;
     DataToMat _dataverter;
+    QTimer _timer;
 
 };
 

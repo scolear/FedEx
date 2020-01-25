@@ -1,6 +1,6 @@
 #include "DataHandler.h"
 
-DataHandler::DataHandler(std::string comPort, MainWindow& mainWindow) : _mainWindow(mainWindow), _dataverter(600)
+DataHandler::DataHandler(std::string comPort, MainWindow& mainWindow) : _mainWindow(mainWindow), _dataverter(600), _timer(this)
 {
     qRegisterMetaType<std::map<int, int>>("Type");
 
@@ -12,9 +12,13 @@ DataHandler::DataHandler(std::string comPort, MainWindow& mainWindow) : _mainWin
     QObject::connect(&_readerThread, &QThread::finished, reader, &QObject::deleteLater);
     QObject::connect(this, SIGNAL(startReading()), reader, SLOT(readData()));
     QObject::connect(reader, SIGNAL(dataReady()), this, SLOT(handleResults()));
+    //QObject::connect(reader, SIGNAL(sendDataPair(int, int)), this, SLOT(handlePair(int, int)));
     _readerThread.start();
 
     _mainWindow.updateLog("Connection established, reading data...");
+
+    QObject::connect(&_timer, SIGNAL(timeout()), this, SLOT(clearFrame()));
+    _timer.start(5000);
 }
 
 DataHandler::~DataHandler()
@@ -30,4 +34,15 @@ void DataHandler::handleResults()
         _mainWindow.setImage(_dataverter.convert(_mainWindow.getImage(), dat.first, (dat.second) / 3));
     }
     _mainWindow.setFrame();
+}
+
+void DataHandler::handlePair(int angle, int dist)
+{
+    _mainWindow.setImage(_dataverter.convert(_mainWindow.getImage(), angle, dist / 3));
+    _mainWindow.setFrame();
+}
+
+void DataHandler::clearFrame()
+{
+    _dataverter.clearScreen(_mainWindow.getImage());
 }
