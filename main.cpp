@@ -1,4 +1,4 @@
-#include <iostream>
+
 #include <QApplication>
 #include "UiMainWindow.h"
 #include "DataHandler.h"
@@ -11,7 +11,7 @@ int main(int argc, char** argv)
     MainWindow win;
     win.show();
 
-    DataHandler handler("\\\\.\\COM9", win);
+    DataHandler handler("/dev/ttyACM0", win);
 
     handler.startReading();
 

@@ -30,7 +30,11 @@ void Reader::readData()
                 distance.push_back(recievedPacketDistance[i]);
             }
         }
-        (*_data)[std::stoi(angle)] = std::stoi(distance);
+        int angleN = std::stoi(angle);
+        int distanceN = std::stoi(distance);
+
+        (*_data)[angleN] = distanceN;
+
         for (int i = 0; i < 10; i++) {
             recievedPacketAngle[i] = '\0';
             recievedPacketDistance[i] = '\0';

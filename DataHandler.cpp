@@ -1,8 +1,6 @@
-#include <iostream>
 #include "DataHandler.h"
-#include <QMetaType>
 
-DataHandler::DataHandler(std::string comPort, MainWindow& mainWindow) : _mainWindow(mainWindow)
+DataHandler::DataHandler(std::string comPort, MainWindow& mainWindow) : _mainWindow(mainWindow), _dataverter(600)
 {
     qRegisterMetaType<std::map<int, int>>("Type");
 
@@ -16,38 +14,20 @@ DataHandler::DataHandler(std::string comPort, MainWindow& mainWindow) : _mainWin
     QObject::connect(reader, SIGNAL(dataReady()), this, SLOT(handleResults()));
     _readerThread.start();
 
-    auto* converter = new DataConverter(_data, mainWindow);
-
-    converter->moveToThread(&_converterThread);
-
-    QObject::connect(&_converterThread, &QThread::finished, converter, &QObject::deleteLater);
-    QObject::connect(this, SIGNAL(startConverting()), converter, SLOT(convertData()));
-    QObject::connect(converter, SIGNAL(matReady()), this, SLOT(handleMat()));
-    _converterThread.start();
-
+    _mainWindow.updateLog("Connection established, reading data...");
 }
 
 DataHandler::~DataHandler()
 {
     _readerThread.quit();
     _readerThread.wait();
-    _converterThread.quit();
-    _converterThread.wait();
 }
 
 void DataHandler::handleResults()
 {
     for (auto dat : _data) {
-        std::cout << dat.first << " : " << dat.second << std::endl;
+        //std::cout << dat.first << " : " << dat.second << " || distance / 3: " << (dat.second / 3) << std::endl;
+        _mainWindow.setImage(_dataverter.convert(_mainWindow.getImage(), dat.first, (dat.second) / 3));
     }
-}
-
-std::map<int, int>& DataHandler::getMap()
-{
-    return _data;
-}
-
-void DataHandler::handleMat()
-{
     _mainWindow.setFrame();
 }

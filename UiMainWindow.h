@@ -17,9 +17,6 @@
 #include <iostream>
 #include <utility>
 
-
-class DataToMat;
-
 class MainWindow : public QMainWindow
 {
     Q_OBJECT
@@ -29,6 +26,7 @@ public:
     void generateLayout();
     void setFrame();
     cv::Mat* getImage();
+    void setImage(cv::Mat);
 
 
 public slots:
@@ -54,9 +52,7 @@ private:
     QLabel          *_messageLog;
 
     cv::Mat         _image;
-    DataToMat       *_dataToMat;
-    static std::vector<float> *_data;
-    QTimer _timer;
+    QTimer          _timer;
 };
 
 #endif // DESIGNERIQFMCA_H
