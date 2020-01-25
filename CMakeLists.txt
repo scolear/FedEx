@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.16)
+cmake_minimum_required(VERSION 3.15)
 project(FedEx)
 
 if(UNIX)
@@ -19,6 +19,8 @@ set(SOURCES
         Reader.cpp
         DataHandler.cpp
         SerialCommunication.cpp
+        LinuxSerial.cpp
+        DataConverter.cpp
         )
 
 qt5_wrap_cpp(SOURCES
@@ -27,6 +29,8 @@ qt5_wrap_cpp(SOURCES
         Reader.h
         DataHandler.h
         SerialCommunication.h
+        LinuxSerial.h
+        DataConverter.h
         )
 
 add_executable(${PROJECT_NAME} ${SOURCES})

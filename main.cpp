@@ -8,24 +8,46 @@
 
 int main(int argc, char** argv)
 {
-    std::srand(time(nullptr));
+    //std::srand(time(nullptr));
 
     QApplication app(argc, argv);
     MainWindow win;
     win.show();
+    //
+    //int width = 600;
+    //DataToMat dataverter(width);
+    //std::vector<float> data;
+    //for (size_t i = 0; i < 360; i++)
+    //{
+    //    data.push_back((rand() % (width/2)) +5);
+    //}
 
+    /*
+    int width = 600;
 
-    /*int width = 600;
     DataToMat dataverter(width);
+
     std::vector<float> data;
-    for (size_t i = 0; i < 360; i++)
+
+    while (cv::waitKey(27))
+
     {
-        data.push_back((rand() % (width/2)) +5);
+        for (int i = 0; i < 360; i++)
+        {
+            int random = (rand() % (width / 2)+20);            
+            cv::imshow("test", dataverter.convert(img, i, random));
+            cv::waitKey(1);
+        }
+        //dataverter.dottedShow(img, data);
+        //data.clear();
+        img.release();
+
     }*/
 
-    DataHandler handler;
+    DataHandler handler("\\\\.\\COM9", win);
 
     handler.startReading();
+    handler.startConverting();
 
     return QApplication::exec();
 
@@ -60,5 +82,4 @@ int main(int argc, char** argv)
         }
     }
     */
-    return 0;
 }

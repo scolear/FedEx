@@ -10,7 +10,7 @@
       "cmakeCommandArgs": "",
       "buildCommandArgs": "-v",
       "ctestCommandArgs": "",
-      "cmakeExecutable": "C:\\Program Files\\CMake\\bin\\cmake.exe",
+      "cmakeExecutable": "C:/dev/cmake/bin/cmake.exe",
       "variables": []
     }
   ]

@@ -7,6 +7,8 @@ MainWindow::MainWindow() : _timer(this)
 {
     generateLayout();
 
+    _image = cv::Mat(600, 600, CV_8UC3, cv::Scalar(0, 0, 0));
+
     QMetaObject::connectSlotsByName(this);
 }
 
@@ -79,24 +81,11 @@ void MainWindow::generateLayout()
 
 void MainWindow::setFrame()
 {
+    cv::Mat img = _image;
 
-    cv::Mat img;
-    //img = cv::imread("../Test.jpg");
     //cv::cvtColor(img, img,cv::COLOR_BGR2RGB);
-  
-    int width = 600;
-    DataToMat dataverter(width);
-    std::vector<float> data;
-    for (size_t i = 0; i < 360; i++)
-    {
-        data.push_back((rand() % (width/2)) +5);
-    }
-   
-    img = dataverter.convert(data);
 
-    cv::cvtColor(img,img,cv::COLOR_BGR2RGB);
-
-    QImage imag ((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
+    QImage imag((uchar*)img.data, img.cols, img.rows, img.step, QImage::Format_RGB888);
 
     _displayLabel->setPixmap(QPixmap::fromImage(imag));
 }
@@ -104,4 +93,9 @@ void MainWindow::setFrame()
 void MainWindow::updateLog(const std::string& message)
 {
     _messageLog->setText(QString::fromUtf8(message.c_str()));
+}
+
+cv::Mat* MainWindow::getImage()
+{
+    return &_image;
 }

@@ -122,5 +122,5 @@ void SerialCommunication::setUpSerialTimeouts()
         std::cout << "Timeout set problem" << std::endl;
     }
 }
+
 #endif
- 

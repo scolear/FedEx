@@ -22,4 +22,5 @@ private:
     COMMTIMEOUTS _communicationTimeouts;
     DWORD _dwEventMask;
 };
+
 #endif
