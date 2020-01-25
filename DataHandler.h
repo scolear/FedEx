@@ -8,7 +8,6 @@
 #include <iostream>
 #include "UiMainWindow.h"
 #include "Reader.h"
-#include "DataConverter.h"
 
 class DataHandler : public QObject
 {

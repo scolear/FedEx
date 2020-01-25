@@ -16,5 +16,4 @@ int main(int argc, char** argv)
     handler.startReading();
 
     return QApplication::exec();
-
 }
