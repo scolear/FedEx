@@ -17,6 +17,8 @@
 #include <iostream>
 #include <utility>
 
+#define IMAGESIZE 800
+
 class MainWindow : public QMainWindow
 {
     Q_OBJECT

@@ -6,7 +6,7 @@ MainWindow::MainWindow() : _timer(this)
 {
     generateLayout();
 
-    _image = cv::Mat(600, 600, CV_8UC3, cv::Scalar(0, 0, 0));
+    _image = cv::Mat(IMAGESIZE, IMAGESIZE, CV_8UC3, cv::Scalar(0, 0, 0));
 
     QMetaObject::connectSlotsByName(this);
 }
@@ -17,6 +17,7 @@ void MainWindow::generateLayout()
 {
     if (objectName().isEmpty())
         setObjectName(QString::fromUtf8("MainWindow"));
+    setStyleSheet(QString::fromUtf8("background-color: rgb(60, 63, 65);"));
     resize(505, 383);
     _centralWidget = new QWidget(this);
     _centralWidget->setObjectName(QString::fromUtf8("_centralWidget"));
@@ -98,10 +99,11 @@ void MainWindow::setImage(cv::Mat imageIn)
 
 void MainWindow::createScreenShot()
 {
+    cv::Mat frameToSave = _image;
     QString file_name = QFileDialog::getSaveFileName(_saveResultButton, "Save file", QDir::homePath(), "*.jpeg", nullptr, QFileDialog::DontUseNativeDialog );
     std::string path = file_name.toUtf8().constData();
     path = path + ".jpeg";
-    cv::cvtColor(_image,_image,cv::COLOR_BGR2RGB);
-    cv::imwrite(path, _image);
+    cv::cvtColor(frameToSave,frameToSave,cv::COLOR_BGR2RGB);
+    cv::imwrite(path, frameToSave);
     updateLog("Image saved");
 }

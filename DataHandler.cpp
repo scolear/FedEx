@@ -1,6 +1,6 @@
 #include "DataHandler.h"
 
-DataHandler::DataHandler(std::string comPort, MainWindow& mainWindow) : _mainWindow(mainWindow), _dataverter(600)
+DataHandler::DataHandler(std::string comPort, MainWindow& mainWindow) : _mainWindow(mainWindow), _dataverter(IMAGESIZE)
 {
     qRegisterMetaType<std::map<int, int>>("Type");
 
