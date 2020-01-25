@@ -13,8 +13,10 @@ public:
 	void drawColoredPoints(cv::Mat img, float angle, float distance);
 	void refresherLine(cv::Mat img, float angle, float distance);
 	void blackrefresher(cv::Mat img, float angle, float distance);
+    void pointDelete(cv::Mat img, float angle);
 	cv::Scalar distancedScalar(int distance);
 
 private:
 	int _width;
+    std::map<int, int> _previousDistance;
 };

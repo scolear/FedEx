@@ -4,6 +4,8 @@
 
 #include <QtCore/QObject>
 #include <QtCore/QThread>
+#include <QMetaType>
+#include <iostream>
 #include "UiMainWindow.h"
 #include "Reader.h"
 #include "DataConverter.h"

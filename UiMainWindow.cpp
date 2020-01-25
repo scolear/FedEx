@@ -108,4 +108,5 @@ void MainWindow::createScreenShot()
     path = path + ".jpeg";
     cv::cvtColor(_image,_image,cv::COLOR_BGR2RGB);
     cv::imwrite(path, _image);
+    updateLog("Image saved");
 }

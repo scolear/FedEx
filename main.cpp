@@ -1,7 +1,6 @@
-#include <iostream>
+
 #include <QApplication>
 #include "UiMainWindow.h"
-#include "DataToMat.h"
 #include "DataHandler.h"
 #include "SerialCommunication.h"
 

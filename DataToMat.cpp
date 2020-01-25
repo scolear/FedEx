@@ -2,15 +2,16 @@
 
 #define PI 3.14159265
 
-DataToMat::DataToMat(int width) : _width(width)
-{
-}
+DataToMat::DataToMat(int width) : _width(width) {}
 
 cv::Mat DataToMat::convert(cv::Mat* img, float angle, float distance)
 {
+    if (distance > _width / 2) distance = 300;
+    if (_previousDistance[angle] != distance) {
+        pointDelete(*img, angle);
+    }
+    _previousDistance[angle] = distance;
     drawColoredPoints(*img, angle, distance);
-    blackrefresher(*img, angle, _width);
-    //refresherLine(*img, angle, _width);
     return *img;
 }
 
@@ -51,8 +52,19 @@ void DataToMat::blackrefresher(cv::Mat img, float angle, float distance)
         cv::Point(_width / 2, _width / 2),
         pt,
         cv::Scalar(0, 0, 0),
-        10,
+        5,
         8);
+}
+
+void DataToMat::pointDelete(cv::Mat img, float angle)
+{
+    cv::Point pt = getCoordinates(angle, _previousDistance[angle]);
+    cv::line(img,
+             pt,
+             pt,
+             cv::Scalar(0, 0, 0),
+             5,
+             8);
 }
 
 cv::Scalar DataToMat::distancedScalar(int distance)
