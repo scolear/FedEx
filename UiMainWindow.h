@@ -13,6 +13,7 @@
 #include <QtWidgets/QWidget>
 #include <QTimer>
 
+
 class DataToMat;
 
 class MainWindow : public QMainWindow
@@ -49,9 +50,7 @@ private:
     cv::Mat         _image;
     DataToMat       *_dataToMat;
     static std::vector<float> *_data;
-
     QTimer _timer;
-
 };
 
 #endif // DESIGNERIQFMCA_H

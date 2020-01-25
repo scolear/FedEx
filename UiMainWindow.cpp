@@ -1,5 +1,5 @@
 #include "UiMainWindow.h"
-
+#include <iostream>
 #include <utility>
 
 
@@ -29,6 +29,7 @@ void MainWindow::generateLayout()
     _verticalLayout_2->setObjectName(QString::fromUtf8("verticalLayout_2"));
     _displayLabel = new QLabel(_labelWidget);
     _displayLabel->setObjectName(QString::fromUtf8("_displayLabel"));
+    _displayLabel->setAlignment(Qt::AlignCenter);
 
     std::vector<float> data;
     setFrame();///TODO GIVE VECTOR TO FUNCTION;

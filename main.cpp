@@ -5,6 +5,7 @@
 #include "DataHandler.h"
 #include "SerialCommunication.h"
 
+
 int main(int argc, char** argv)
 {
     //std::srand(time(nullptr));
@@ -23,6 +24,7 @@ int main(int argc, char** argv)
 
     /*
     int width = 600;
+
     DataToMat dataverter(width);
 
     std::vector<float> data;
