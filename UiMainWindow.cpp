@@ -82,11 +82,11 @@ void MainWindow::generateLayout()
 void MainWindow::setFrame()
 {
 
-    //cv::Mat img;
-    _image = cv::imread("../Test.jpg");
+
+    //_image = cv::imread("../Test.jpg");
 
   
-   /* int width = 600;
+    int width = 600;
     DataToMat dataverter(width);
     std::vector<float> data;
     for (size_t i = 0; i < 360; i++)
@@ -94,7 +94,7 @@ void MainWindow::setFrame()
         data.push_back((rand() % (width/2)) +5);
     }
    
-    img = dataverter.convert(data);*/
+    _image = dataverter.convert(data);
 
     cv::cvtColor(_image,_image,cv::COLOR_BGR2RGB);
 
