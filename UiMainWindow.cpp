@@ -39,6 +39,7 @@ void MainWindow::generateLayout()
     _saveResultButton = new QPushButton(_buttonsWidget);
     _saveResultButton->setObjectName(QString::fromUtf8("_saveResultButton"));
     _saveResultButton->setText(QString::fromUtf8("Save image"));
+    _saveResultButton->setStyleSheet("color: rgb(170,170,170)");
     QObject::connect(_saveResultButton, SIGNAL(clicked()), this, SLOT(createScreenShot()));
 
     _horizontalLayout->addWidget(_saveResultButton);
@@ -46,6 +47,7 @@ void MainWindow::generateLayout()
     _exitButton = new QPushButton(_buttonsWidget);
     _exitButton->setObjectName(QString::fromUtf8("_exitButton"));
     _exitButton->setText(QString::fromUtf8("Quit"));
+    _exitButton->setStyleSheet("color: rgb(170,170,170)");
     QObject::connect(_exitButton, SIGNAL(clicked()), this, SLOT(deleteLater()));
 
     _horizontalLayout->addWidget(_exitButton);
